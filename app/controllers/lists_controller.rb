@@ -6,16 +6,13 @@ class ListsController < ApplicationController
   
  
   def create
-     
-      list = List.new(list_params)
-    
-     list.save
-     
-    
-    redirect_to list_path(list.id)
-  end
- 
-   
+     @list = List.new(list_params)
+     if @list.save
+       redirect_to list_path(@list.id)
+     else
+       render :new
+     end
+   end
 
   def index
     @lists = List.all
